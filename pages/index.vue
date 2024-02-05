@@ -22,20 +22,17 @@
   
 <script setup lang="ts">
   import { usePokemonStore } from '~/store/pokemon'
-  
-  interface PokemonWithDetails {
-    name: string
-    url: string
-    details: any 
-  }
+  import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 
-  const pokemonStore = usePokemonStore() as ReturnType<typeof usePokemonStore>
+  const pokemonStore = usePokemonStore()
   const scrollComponent = ref<HTMLElement | null>(null)
   let isScrolling = false
 
   onMounted(async () => {
-    await pokemonStore.fetchPokemons()
-    await pokemonStore.fetchPokemonDetails()
+    if (pokemonStore.pokemonsWithDetails.length === 0) {
+      await pokemonStore.fetchPokemons()
+      await pokemonStore.fetchPokemonDetails()
+    }
     window.addEventListener('scroll', handleScroll)
   })
 
@@ -68,5 +65,4 @@
   const pokemonList = computed(() => {
     return pokemonStore.pokemonsWithDetails
   })
-
 </script>

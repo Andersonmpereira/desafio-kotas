@@ -1,0 +1,5 @@
+@mixin pokemon-label($type) {
+    .#{$type} {
+      background-color: map-get($pokemonTypes, $type);
+    }
+}

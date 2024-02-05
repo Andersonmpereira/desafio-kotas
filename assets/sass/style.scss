@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'mixins.scss';
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+    font-family: "Mulish", sans-serif;
+    background-color: $gray-medium;
+}
+
+.nav {
+    box-shadow: 0px 1px 1px 0px $gray-light;
+}
+
+.card {
+    box-shadow: 0px 4px 20px 0px $gray-light;
+}
+
+.search {
+    &__input {
+        border: 1px solid $gray-light;
+        color: #C1BEBE;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+/* elements label */
+
+@each $type, $color in $pokemonTypes {
+    @include pokemon-label($type);
+}

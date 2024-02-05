@@ -9,7 +9,7 @@
     class="max-w-5xl mx-auto grid xl:grid-cols-5 sm:grid-cols-2 gap-x-4 gap-y-6" 
     ref="scrollComponent"
   >
-    <Card v-for="pokemon in pokemonsWithDetails" :key="pokemon.name">
+    <Card v-for="pokemon in pokemonList" :key="pokemon.name">
       <Info 
         :img="pokemon.details.sprites.front_default"
         :name="pokemon.name"
@@ -17,7 +17,6 @@
         :attribute="pokemon.details.types"
       />
     </Card>
-    <div v-if="loading" class="text-center my-4">Loading...</div>
   </section>   
 </template>
   
@@ -32,7 +31,6 @@
 
   const pokemonStore = usePokemonStore() as ReturnType<typeof usePokemonStore>
   const scrollComponent = ref<HTMLElement | null>(null)
-  const loading = ref(false)
   let isScrolling = false
 
   onMounted(async () => {
@@ -56,8 +54,7 @@
   }
 
   const loadMorePokemons = async () => {
-    console.log('entrou na função')
-    if (!scrollComponent.value || loading.value) return
+    if (!scrollComponent.value) return
 
     const scrollHeight = scrollComponent.value.scrollHeight
     const scrollTop = scrollComponent.value.scrollTop
@@ -68,6 +65,8 @@
     }
   }
 
-  const pokemonsWithDetails: PokemonWithDetails[] = pokemonStore.pokemonsWithDetails
+  const pokemonList = computed(() => {
+    return pokemonStore.pokemonsWithDetails
+  })
 
 </script>

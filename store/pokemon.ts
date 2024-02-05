@@ -17,8 +17,10 @@ export const usePokemonStore = defineStore({
     pokemons: [] as Pokemon[],
     pokemonsWithDetails: [] as PokemonWithDetails[],
     filteredPokemons: [] as PokemonWithDetails[],
+    originalPokemonList: [] as PokemonWithDetails[],
     nextUrl: '',
-    loadingMore: false
+    loadingMore: false,
+    isLoadingMore: false
   }),
   actions: {
     async fetchPokemons(this: Store): Promise<void> {
@@ -32,28 +34,47 @@ export const usePokemonStore = defineStore({
         const response = await fetch(pokemon.url)
         const data = await response.json()
         this.pokemonsWithDetails.push({ ...pokemon, details: data })
+        this.originalPokemonList = this.pokemonsWithDetails
       }
     },
     async fetchMorePokemons(this: Store): Promise<void> {
       if (!this.nextUrl || this.loadingMore) return
-      
+
       this.loadingMore = true
-  
+      this.isLoadingMore = true // Altere o estado para true quando iniciar o carregamento
+
       const response = await fetch(this.nextUrl)
       const { results, next } = await response.json()
-  
-      this.nextUrl = next
 
-      // Limpa a lista de Pokémons antes de adicionar novos
+      this.nextUrl = next
       this.pokemons = []
-  
+
       for (const pokemon of results) {
         const response = await fetch(pokemon.url)
         const data = await response.json()
         this.pokemonsWithDetails.push({ ...pokemon, details: data })
       }
-  
+
       this.loadingMore = false
+      this.isLoadingMore = false
+    },
+    filterPokemons(this: Store, searchTerm: string): void {
+      if (!searchTerm) {
+        this.pokemonsWithDetails = this.originalPokemonList
+        return
+      }
+
+      const filteredPokemons = this.pokemonsWithDetails.filter(pokemon => {
+        const nameMatches = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const codMatches = pokemon.details.id.toString().includes(searchTerm)
+        return nameMatches || codMatches
+      })
+      
+      this.filteredPokemons = filteredPokemons
+
+      if (this.filteredPokemons.length > 0) {
+        this.pokemonsWithDetails = this.filteredPokemons
+      }
     }
   }
 })

@@ -1,6 +1,6 @@
 <template>
     <div class="search my-4">
-      <input type="text" class="search__input w-full px-9 py-3.5 rounded-3xl text-sm font-normal" placeholder="Pesquise por nome ou código" v-model="searchTerm">
+      <input type="text" class="search__input w-full px-9 py-3.5 rounded-3xl text-sm font-normal" placeholder="Pesquise por nome ou código" v-model="searchTerm" :disabled="isLoadingMore">
     </div>
 </template>
   
@@ -9,6 +9,7 @@
   
     const pokemonStore = usePokemonStore() as ReturnType<typeof usePokemonStore>
     const searchTerm = ref('')
+    const isLoadingMore = computed(() => pokemonStore.isLoadingMore)
   
     watch(searchTerm, (newValue, oldValue) => {
         filterPokemons(newValue)
@@ -20,8 +21,8 @@
             const codMatches = pokemon.details.id.toString().includes(searchTerm)
             return nameMatches || codMatches
         })
-        pokemonStore.filterPokemons(searchTerm) // Passar apenas o 'searchTerm'
-        pokemonStore.filteredPokemons = filteredPokemons // Definir 'filteredPokemons' como uma propriedade no store
+        pokemonStore.filterPokemons(searchTerm)
+        pokemonStore.filteredPokemons = filteredPokemons 
     }
 </script>
   

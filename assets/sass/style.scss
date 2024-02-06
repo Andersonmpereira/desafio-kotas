@@ -5,6 +5,7 @@
 body {
     font-family: "Mulish", sans-serif;
     background-color: $gray-medium;
+    @include custom-scrollbar();
 }
 
 .nav {

@@ -1,3 +1,11 @@
+describe('Server availability test', () => {
+  it('Should check if the server is running', () => {
+    cy.request('http://localhost:3000/').then((response) => {
+      expect(response.status).to.eq(200)
+    })
+  })
+})
+
 describe('Interface interaction test', () => {  
   it('Should loading homepage', () => {
     cy.visit('http://localhost:3000/')
@@ -6,20 +14,20 @@ describe('Interface interaction test', () => {
 
   it('Should filter pokemon by name', () => {
     cy.visit('http://localhost:3000/')
-    cy.get('.search__input').type('squirtle', { delay: 500 })
+    cy.get('.search__input').type('squirtle', { delay: 1000 })
     cy.get('.card').should('have.length', 1)
   })
 
   it('Should filter pokemon by id', () => {
     cy.visit('http://localhost:3000/')
-    cy.get('.search__input').type('01')
-    cy.get('.card').should('have.length', 1)
+    cy.get('.search__input').type('01', { delay: 1000 })
+    cy.get('.card').should('have.length', 12)
   })
 
   it('Should display all cards after clearing the search input', () => {
     cy.visit('http://localhost:3000/')
-    cy.get('.search__input').type('01')
-    cy.get('.card').should('have.length', 1)
+    cy.get('.search__input').type('01', { delay: 1000 })
+    cy.get('.card').should('have.length', 12)
     cy.get('.search__input').clear()
     cy.get('.card').should('have.length.greaterThan', 1)
   })

@@ -1,0 +1,21 @@
+@mixin pokemon-label($type) {
+    .#{$type} {
+      background-color: map-get($pokemonTypes, $type);
+    }
+}
+
+@mixin custom-scrollbar() {
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $gray-medium;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 10px;
+    background-color: #fff;
+  }
+}

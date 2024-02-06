@@ -6,9 +6,10 @@ Desafio tecnico para a vaga de front-end da empresa Kotas
 
 1. [Visão Geral](#visão-geral)
 2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-3. [Instalação](#instalação)
-4. [Como Usar](#como-usar)
-5. [Estrutura do Projeto](#estrutura-do-projeto)
+3. [Pré-requisitos](#Pré-requisitos)
+4. [Instalação](#instalação)
+5. [Como Usar](#como-usar)
+6. [Estrutura do Projeto](#estrutura-do-projeto)
 
 ## Visão Geral
 
@@ -30,12 +31,20 @@ O desafio consistia em criar uma tela com renderização de cards pokemons e bus
 - pinia
 - Cypress
 
+## Pré-requisitos
+
+- Node.js - v18.0.0 ou superior
+- npm ou yarn
+
 ## Instalação
 
 Para instalar siga o passo a passo:
 ```bash
 # Clone este repositório.
 $ git clone <git@github.com:Andersonmpereira/desafio-kotas.git>
+
+# Acesse o diretorio
+$ cd desafio-kotas
 
 # instale as dependencias
 $ npm install
@@ -44,7 +53,7 @@ $ npm install
 
 ## Como Usar
 
-Para inciar o projeto, acesso o diretorio clonado e rode o comando
+Para iniciar o projeto, deve acessar o diretorio clonado e rode o comando
 ```bash.
 $ npm run dev
 ```
@@ -55,7 +64,7 @@ O acesso é `localhost:porta`, por exemplo:
 http://localhost:3000/
 ```
 
-Para rodar os testes e2e basta rodar o comando no terminal:
+Para rodar os testes e2e basta executar o seguinte comando no terminal:
 ```bash
 # Escolha entre electron, chrome e firefox como ambiente de teste.
 $ npx cypress open

@@ -15,14 +15,7 @@ Desafio tecnico para a vaga de front-end da empresa Kotas
 
 O desafio consistia em criar uma tela com renderização de cards pokemons e busca ativa atraves de uma barra de busca. Além disso, ao clicar no card do pokemon, deveria redirecionar para uma nova tela com suas habilidades.
 
-![homepage](https://i.imgur.com/hcktxLWs.gif)
-
-
-![responsible](https://i.imgur.com/fElfEQos.gif)
-
-
-![pages](https://i.imgur.com/rn8i3qTs.gif)
-
+![homepage](https://i.imgur.com/FYNVQ4X.gif)
 
 ## Tecnologias Utilizadas
 

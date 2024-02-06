@@ -1,4 +1,3 @@
-// store/index.ts
 import { defineStore } from 'pinia'
 import type { Store } from 'pinia'
 
@@ -59,22 +58,18 @@ export const usePokemonStore = defineStore({
       this.isLoadingMore = false
     },
     filterPokemons(this: Store, searchTerm: string): void {
-      if (!searchTerm) {
+      if (searchTerm.trim() === '') {
         this.pokemonsWithDetails = this.originalPokemonList
         return
       }
 
-      const filteredPokemons = this.pokemonsWithDetails.filter(pokemon => {
+      const filteredPokemons = this.originalPokemonList.filter(pokemon => {
         const nameMatches = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
         const codMatches = pokemon.details.id.toString().includes(searchTerm)
         return nameMatches || codMatches
       })
-      
-      this.filteredPokemons = filteredPokemons
 
-      if (this.filteredPokemons.length > 0) {
-        this.pokemonsWithDetails = this.filteredPokemons
-      }
+      this.pokemonsWithDetails = filteredPokemons
     }
   }
 })

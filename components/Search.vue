@@ -4,6 +4,7 @@
       <span class="search__icon">
         <img src="~/assets/svg/search.svg"  alt="Ícone de lupa">
       </span>
+      <div v-if="showNoResultsMessage" class="text-red-500">Nenhum resultado encontrado.</div>
     </div>
 </template>
   
@@ -26,6 +27,9 @@
         })
         pokemonStore.filterPokemons(searchTerm)
         pokemonStore.filteredPokemons = filteredPokemons 
+        showNoResultsMessage.value = filteredPokemons.length === 0 && searchTerm.trim() !== ''
     }
+
+    const showNoResultsMessage = ref(false)
 </script>
   

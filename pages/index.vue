@@ -6,7 +6,7 @@
     <h1 class="text-sm font-bold my-8">Pokémons</h1>
   </section>
   <section 
-    class="max-w-5xl mx-auto grid xl:grid-cols-5 sm:grid-cols-2 gap-x-4 gap-y-6" 
+    class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-5 gap-x-4 gap-y-6" 
     ref="scrollComponent"
   >
     <Card v-for="pokemon in pokemonList" :key="pokemon.name">
@@ -28,29 +28,33 @@
   const scrollComponent = ref<HTMLElement | null>(null)
   let isScrolling = false
 
-  onMounted(async () => {
+  const fetchDataIfNeeded = async () => {
     if (pokemonStore.pokemonsWithDetails.length === 0) {
       await pokemonStore.fetchPokemons()
       await pokemonStore.fetchPokemonDetails()
     }
-    window.addEventListener('scroll', handleScroll)
+  }
+
+  onMounted(async () => {
+    await fetchDataIfNeeded()
+    window.addEventListener('scroll', handleLoadMorePokemons)
   })
 
   onBeforeUnmount(() => {
-    window.removeEventListener('scroll', handleScroll)
+    window.removeEventListener('scroll', handleLoadMorePokemons)
   })
 
-  const handleScroll = async () => {
+  const handleLoadMorePokemons = async () => {
     if (isScrolling) return
 
     isScrolling = true
 
-    await loadMorePokemons()
+    await loadMorePokemonsOnScroll()
 
     isScrolling = false
   }
 
-  const loadMorePokemons = async () => {
+  const loadMorePokemonsOnScroll = async () => {
     if (!scrollComponent.value) return
 
     const scrollHeight = scrollComponent.value.scrollHeight

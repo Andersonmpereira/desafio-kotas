@@ -1,6 +1,9 @@
 <template>
     <div class="search my-4">
       <input type="text" class="search__input w-full px-9 py-3.5 rounded-3xl text-sm font-normal" placeholder="Pesquise por nome ou código" v-model="searchTerm" :disabled="isLoadingMore">
+      <span class="search__icon">
+        <img src="~/assets/svg/search.svg"  alt="Ícone de lupa">
+      </span>
     </div>
 </template>
   

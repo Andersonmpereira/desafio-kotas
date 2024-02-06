@@ -10,6 +10,9 @@
         <Card>
             <AbilitiesList :abilities="abilities" />
         </Card>
+        <NuxtLink to="/" class="flex justify-center text-sm font-bold text-sky-500">
+            Voltar
+        </NuxtLink>
     </section>
 </template>
 
@@ -34,6 +37,6 @@
     }
 
     onBeforeUnmount(() => {
-        singlePokemonStore.abilitiesDetails = []
+        singlePokemonStore.clearAbilitiesDetails()
     })
 </script>

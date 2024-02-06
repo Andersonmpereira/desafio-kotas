@@ -27,29 +27,38 @@ export const useSinglePokemonStore = defineStore({
   }),
   actions: {
     async fetchPokemonDetailsByUrl(this: Store, url: string): Promise<void> {
-      const response = await fetch(url)
-      const data = await response.json()
-      this.pokemonDetails = data
-
-      // Fetch abilities details
-      await this.fetchAbilitiesDetails()
-    },
-    async fetchAbilitiesDetails(this: Store): Promise<void> {
-      if (!this.pokemonDetails) return
-
-      const abilities = this.pokemonDetails.abilities
-      const abilitiesUrls = abilities.map(ability => ability.ability.url)
-
-      for (const url of abilitiesUrls) {
+      try {
         const response = await fetch(url)
         const data = await response.json()
-        const effectEntry = data.effect_entries.find((entry: any) => entry.language.name === 'en')
-        if (effectEntry) {
-          this.abilitiesDetails.push({
-            effect: effectEntry.effect,
-            short_effect: effectEntry.short_effect
-          })
+        this.pokemonDetails = data
+
+        // Fetch abilities details
+        await this.fetchAbilitiesDetails()
+      } catch (error) {
+        console.error('Error fetching pokemon details:', error)
+        // Tratamento de erro
+      }
+    },
+    async fetchAbilitiesDetails(this: Store): Promise<void> {
+      try {
+        if (!this.pokemonDetails) return
+
+        const abilities = this.pokemonDetails.abilities
+        const abilitiesUrls = abilities.map(ability => ability.ability.url)
+
+        for (const url of abilitiesUrls) {
+          const response = await fetch(url)
+          const data = await response.json()
+          const effectEntry = data.effect_entries.find((entry: any) => entry.language.name === 'en')
+          if (effectEntry) {
+            this.abilitiesDetails.push({
+              effect: effectEntry.effect,
+              short_effect: effectEntry.short_effect
+            })
+          }
         }
+      } catch (error) {
+        console.error('Error fetching abilities details:', error)
       }
     }
   }

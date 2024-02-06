@@ -14,6 +14,12 @@ Desafio tecnico para a vaga de front-end da empresa Kotas
 
 O desafio consistia em criar uma tela com renderização de cards pokemons e busca ativa atraves de uma barra de busca. Além disso, ao clicar no card do pokemon, deveria redirecionar para uma nova tela com suas habilidades.
 
+![homepage](https://i.imgur.com/hcktxLW.gif)
+
+![responsible](https://i.imgur.com/fElfEQo.gif)
+
+![pages](https://i.imgur.com/rn8i3qT.gif)
+
 ## Tecnologias Utilizadas
 
 - Nuxt3
@@ -53,6 +59,7 @@ Para rodar os testes e2e basta rodar o comando no terminal:
 ```bash
 # Escolha entre electron, chrome e firefox como ambiente de teste.
 $ npx cypress open
+# Lembre-se que é necessario estar rodando o projeto localmente pois ele valida através do localhost
 
 ```
 

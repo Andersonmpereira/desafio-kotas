@@ -24,6 +24,12 @@ describe('Interface interaction test', () => {
     cy.get('.card').should('have.length.greaterThan', 1)
   })
 
+  it('should display an error message', () => {
+    cy.visit('http://localhost:3000/')
+    cy.get('.search__input').type('dasdasd')
+    cy.contains('.text-red-500', 'Nenhum resultado encontrado.').should('be.visible')
+  })
+
   it('Should load more cards when scrolling down the page', () => {
     let initialCardCount
     cy.visit('http://localhost:3000/')

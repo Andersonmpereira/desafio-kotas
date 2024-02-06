@@ -40,7 +40,7 @@ export const usePokemonStore = defineStore({
       if (!this.nextUrl || this.loadingMore) return
 
       this.loadingMore = true
-      this.isLoadingMore = true // Altere o estado para true quando iniciar o carregamento
+      this.isLoadingMore = true
 
       const response = await fetch(this.nextUrl)
       const { results, next } = await response.json()

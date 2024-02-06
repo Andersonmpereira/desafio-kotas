@@ -32,11 +32,9 @@ export const useSinglePokemonStore = defineStore({
         const data = await response.json()
         this.pokemonDetails = data
 
-        // Fetch abilities details
         await this.fetchAbilitiesDetails()
       } catch (error) {
         console.error('Error fetching pokemon details:', error)
-        // Tratamento de erro
       }
     },
     async fetchAbilitiesDetails(this: Store): Promise<void> {
